@@ -15,11 +15,9 @@ module Spree
           Rails.configuration.cache_classes ? require(c) : load(c)
         end
       end
-
-      config.after_initialize do |app|
-        app.config.spree.payment_methods += [
-          Spree::PaymentMethod::MollieIdeal
-         ]
+      
+      initializer "spree.mollie.payment_methods", :after => "spree.register.payment_methods" do |app|
+        app.config.spree.payment_methods << Spree::PaymentMethod::MollieIdeal
       end
 
       config.to_prepare &method(:activate).to_proc
