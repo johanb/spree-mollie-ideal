@@ -28,7 +28,6 @@ module Spree
       ::Mollie.partner_id = preferred_partner_id
       description = "Betaling voor order nummer : #{'test'}"
 
-
       response = ::Mollie::Ideal.prepare_payment(payment.bank_id,
                                                  amount,
                                                  description,
